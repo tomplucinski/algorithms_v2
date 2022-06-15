@@ -1,0 +1,1 @@
+This is a function that takes an array of distinc integers and a target sum. If any two numbers in the array sum up to the target, the function will return them in an array in any order. If no two numbers sum up to the target, it will return an empty array.
