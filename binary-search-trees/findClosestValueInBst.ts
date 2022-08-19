@@ -1,7 +1,6 @@
-export function findClosestValueInBst(
-  tree: { value: number; left: any; right: any },
-  target: number
-) {
+import { BST } from "../types";
+
+export function findClosestValueInBst(tree: BST, target: number) {
   let closestNumToTarget = tree.value;
   let direction = null;
 
@@ -42,15 +41,4 @@ export function findClosestValueInBst(
 
 function findDiff(num1: number, num2: number) {
   return Math.abs(num1 - num2);
-}
-
-class BST {
-  left: BST | null;
-  right: BST | null;
-  value: number;
-  constructor(value: number) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
 }
