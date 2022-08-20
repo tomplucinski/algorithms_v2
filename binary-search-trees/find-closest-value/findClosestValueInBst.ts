@@ -1,4 +1,4 @@
-import { BST } from "../types";
+import { BST } from "../../types";
 
 export function findClosestValueInBst(tree: BST, target: number) {
   let closestNumToTarget = tree.value;
