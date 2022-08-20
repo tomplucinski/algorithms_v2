@@ -1,5 +1,5 @@
 import { findClosestValueInBst } from "./findClosestValueInBst";
-import { BST } from "../types";
+import { BST } from "../../types";
 
 describe("tests", () => {
   it("Test Case #1", () => {
