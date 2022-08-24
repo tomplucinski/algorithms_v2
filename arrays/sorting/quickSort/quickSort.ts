@@ -1,39 +1,44 @@
+// Best O(nlog(n)) time | O(log(n)) space
+// Average O(nlog(n)) time | O(log(n)) space
+// Worst O(n^2) time | O(log(n)) space
+
 export function quickSort(array: number[]) {
-  debugger;
-  let pIndex = 0;
-  let leftIndex = 1;
-  let rightIndex = array.length - 1;
+  quickSortHelper(array, 0, array.length - 1);
+  return array;
+}
+
+function quickSortHelper(array: number[], startIdx: number, endIdx: number) {
+  if (startIdx >= endIdx) {
+    return;
+  }
+  const pivotIdx = startIdx;
+  let leftIndex = startIdx + 1;
+  let rightIndex = endIdx;
 
   while (leftIndex <= rightIndex) {
-    let pivot = array[pIndex];
-    let leftPointer = array[leftIndex];
-    let rightPointer = array[rightIndex];
-    if (leftPointer > pivot && rightPointer < pivot) {
+    if (
+      array[leftIndex] > array[pivotIdx] &&
+      array[rightIndex] < array[pivotIdx]
+    ) {
       swap(leftIndex, rightIndex, array);
-      continue;
     }
-    if (leftPointer <= pivot) {
+    if (array[leftIndex] <= array[pivotIdx]) {
       leftIndex++;
-      continue;
     }
-    if (rightPointer >= pivot) {
+    if (array[rightIndex] >= array[pivotIdx]) {
       rightIndex--;
-      continue;
     }
   }
 
-  swap(pIndex, rightIndex, array);
-  const frontArray = array.slice(0, rightIndex);
-  const backArray = array.slice(rightIndex + 1);
-
-  if (frontArray.length < backArray.length) {
-    if (frontArray.length > 1) {
-      quickSort(frontArray);
-    }
+  swap(pivotIdx, rightIndex, array);
+  const leftSubArrayIsSmaller =
+    rightIndex - 1 - startIdx < endIdx - (rightIndex + 1);
+  if (leftSubArrayIsSmaller) {
+    quickSortHelper(array, startIdx, rightIndex - 1);
+    quickSortHelper(array, rightIndex + 1, endIdx);
   } else {
-    if (backArray.length > 1) {
-      quickSort(backArray);
-    }
+    quickSortHelper(array, rightIndex + 1, endIdx);
+    quickSortHelper(array, startIdx, rightIndex - 1);
   }
 
   return array;
