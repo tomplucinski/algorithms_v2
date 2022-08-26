@@ -5,6 +5,10 @@ class LinkedList {
   }
 }
 
-function removeDuplicatesFromLinkedList(linkedList: LinkedList) {
-  return null;
+function removeDuplicatesFromLinkedList(linkedList: LinkedList[]) {
+  if (linkedList.next) {
+    const nextNode = removeDuplicatesFromLinkedList(linkedList.next);
+
+    return nextNode;
+  }
 }
