@@ -1,1 +1,1 @@
-export * from "./sumTwoNumbers";
+export * from './sumTwoNumbers'

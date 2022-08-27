@@ -1,1 +1,1 @@
-export * from "./quickSort";
+export * from './quickSort'

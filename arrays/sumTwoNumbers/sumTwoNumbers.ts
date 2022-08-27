@@ -4,7 +4,7 @@ export function sumTwoNumbers(array: number[], targetSum: number) {
     return acc
   }, {})
 
-  return array.filter(num => {
+  return array.filter((num) => {
     const remainder = targetSum - num
     if (numbersHash[remainder] !== undefined && num !== remainder) {
       return [num, remainder]

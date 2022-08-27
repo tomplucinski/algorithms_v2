@@ -1,1 +1,1 @@
-export * from "./bubbleSort";
+export * from './bubbleSort'
