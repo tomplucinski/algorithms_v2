@@ -1,1 +1,1 @@
-export * from "./threeNumberSort";
+export * from './threeNumberSort'
