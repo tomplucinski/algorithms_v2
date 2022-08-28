@@ -1,27 +1,23 @@
-class LinkedList {
-  constructor(value) {
-    this.value = value
-    this.next = null
-  }
-}
+import { SingleLinkedList } from '../types'
 
-function removeDuplicatesFromLinkedList(linkedList: any) {
-  const map = {}
+export function removeDuplicatesFromLinkedList(linkedList: SingleLinkedList) {
+  const map: { [key: number]: number } = {}
   let currentNode = linkedList
   let parentNode = null
-  while (true) {
-    if (currentNode.next) {
-      if (!map[currentNode.value]) {
-        map[currentNode.value] = currentNode.value
-      } else {
-        parentNode.next = currentNode.next.value
-        currentNode.next = null
-      }
+  do {
+    if (!map[currentNode.value]) {
+      map[currentNode.value] = currentNode.value
       parentNode = currentNode
       currentNode = currentNode.next
+    } else {
+      const nextNode = currentNode.next
+      if (parentNode) {
+        parentNode.next = currentNode.next
+      }
+      currentNode.next = null
+      currentNode = nextNode
     }
-    break
-  }
+  } while (currentNode)
 
   return linkedList
 }
