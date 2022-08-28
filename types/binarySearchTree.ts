@@ -8,6 +8,7 @@ export class BST {
   left: Node | null = null
   right: Node | null = null
   value: number | null = null
+
   constructor(value: number) {
     this.value = value
   }
