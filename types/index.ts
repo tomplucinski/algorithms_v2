@@ -1,1 +1,2 @@
-export * from './binary-search-tree'
+export * from './binarySearchTree'
+export * from './linkedList'
