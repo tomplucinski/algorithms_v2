@@ -1,11 +1,14 @@
-class BST {
-  constructor(value) {
+export class BST {
+  value: number
+  left: BST
+  right: BST
+  constructor(value: number) {
     this.value = value
     this.left = null
     this.right = null
   }
 
-  insert(value) {
+  insert(value: number) {
     if (value < this.value) {
       if (this.left) {
         this.left.insert(value)
@@ -22,7 +25,7 @@ class BST {
     return this
   }
 
-  contains(value) {
+  contains(value: number) {
     let found = false
 
     if (value === this.value) {
@@ -44,7 +47,7 @@ class BST {
     return found
   }
 
-  remove(value, parent = null) {
+  remove(value: number, parent: BST | null = null) {
     if (value < this.value) {
       if (this.left !== null) {
         this.left.remove(value, this)
