@@ -19,17 +19,7 @@ class DoublyLinkedList {
     this.tail = null
   }
 
-  setHead(node: Node) {
-    if (!this.head && !this.tail) {
-      this.head = node
-      this.tail = node
-      return
-    }
-
-    this.head.prev = node.value
-    node.next = this.head
-    this.head = node
-  }
+  setHead(node: Node) {}
 
   setTail(node) {}
 
@@ -43,5 +33,14 @@ class DoublyLinkedList {
 
   remove(node) {}
 
-  containsNodeWithValue(value) {}
+  containsNodeWithValue(value: number) {
+    let currentNode = this.head
+    while (currentNode !== null) {
+      if (currentNode.value === value) {
+        return true
+      }
+      currentNode = currentNode.next
+    }
+    return false
+  }
 }
