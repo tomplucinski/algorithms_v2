@@ -19,7 +19,23 @@ class DoublyLinkedList {
     this.tail = null
   }
 
-  setHead(node: Node) {}
+  setHead(node: Node) {
+    if (!this.head && !this.tail) {
+      this.head = node
+      this.tail = node
+      return
+    }
+
+    if (this.containsNodeWithValue(node.value)) {
+      node.prev.next = node.next
+      node.next.prev = node.prev
+    }
+
+    this.head.prev = node
+    node.prev = null
+    node.next = this.head
+    this.head = node
+  }
 
   setTail(node) {}
 
