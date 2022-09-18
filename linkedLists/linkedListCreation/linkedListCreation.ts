@@ -37,7 +37,17 @@ class DoublyLinkedList {
     this.head = node
   }
 
-  setTail(node) {}
+  setTail(node: Node) {
+    if (!this.tail) {
+      this.tail = node
+      return
+    }
+
+    const previousTail = this.tail
+    previousTail.next = node
+    this.tail = node
+    this.tail.prev = previousTail
+  }
 
   insertBefore(node, nodeToInsert) {}
 
