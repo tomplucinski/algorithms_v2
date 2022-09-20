@@ -49,7 +49,14 @@ class DoublyLinkedList {
     this.tail.prev = previousTail
   }
 
-  insertBefore(node, nodeToInsert) {}
+  insertBefore(node: Node, nodeToInsert: Node) {
+    if (this.containsNodeWithValue(nodeToInsert.value)) {
+      nodeToInsert.prev = node.prev
+      nodeToInsert.next = node
+      node.prev.next = nodeToInsert
+      node.prev = nodeToInsert
+    }
+  }
 
   insertAfter(node, nodeToInsert) {}
 
