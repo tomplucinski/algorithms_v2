@@ -51,20 +51,41 @@ class DoublyLinkedList {
 
   insertBefore(node: Node, nodeToInsert: Node) {
     if (this.containsNodeWithValue(nodeToInsert.value)) {
-      nodeToInsert.prev = node.prev
-      nodeToInsert.next = node
-      node.prev.next = nodeToInsert
-      node.prev = nodeToInsert
+      this.remove(nodeToInsert)
     }
+    nodeToInsert.prev = node.prev
+    nodeToInsert.next = node
+    node.prev.next = nodeToInsert
+    node.prev = nodeToInsert
   }
 
-  insertAfter(node, nodeToInsert) {}
+  insertAfter(node: Node, nodeToInsert: Node) {
+    if (this.containsNodeWithValue(nodeToInsert.value)) {
+      this.remove(nodeToInsert)
+    }
+    if (node === this.tail) {
+      this.tail = nodeToInsert
+    }
+    nodeToInsert.prev = node
+    nodeToInsert.next = node.next
+    node.next = nodeToInsert
+  }
 
   insertAtPosition(position, nodeToInsert) {}
 
   removeNodesWithValue(value) {}
 
-  remove(node) {}
+  remove(node: Node) {
+    let currentNode = this.head
+    while (currentNode !== this.tail) {
+      if (currentNode === node) {
+        currentNode.next.prev = currentNode.prev
+        currentNode.prev.next = currentNode.next
+        return
+      }
+      currentNode = currentNode.next
+    }
+  }
 
   containsNodeWithValue(value: number) {
     let currentNode = this.head
