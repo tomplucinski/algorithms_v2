@@ -64,7 +64,17 @@ class DoublyLinkedList {
 
   removeNodesWithValue(value) {}
 
-  remove(node) {}
+  remove(node: Node) {
+    let currentNode = this.head
+    while (currentNode !== this.tail) {
+      if (currentNode === node) {
+        currentNode.next.prev = currentNode.prev
+        currentNode.prev.next = currentNode.next
+        return
+      }
+      currentNode = currentNode.next
+    }
+  }
 
   containsNodeWithValue(value: number) {
     let currentNode = this.head
