@@ -71,7 +71,24 @@ class DoublyLinkedList {
     node.next = nodeToInsert
   }
 
-  insertAtPosition(position, nodeToInsert) {}
+  insertAtPosition(position: number, nodeToInsert: Node) {
+    let currentNode = this.head
+    let index = 1
+    while (currentNode) {
+      if (position === index) {
+        if (currentNode === this.head) {
+          this.head = nodeToInsert
+        }
+        if ((currentNode = this.tail)) {
+          this.tail = nodeToInsert
+        }
+        nodeToInsert.prev = currentNode.prev
+        nodeToInsert.next = currentNode.next
+      }
+      currentNode = currentNode.next
+      index += 1
+    }
+  }
 
   removeNodesWithValue(value) {}
 
