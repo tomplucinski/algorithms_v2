@@ -1,4 +1,4 @@
-class Node {
+export class Node {
   value: number
   prev: Node
   next: Node
@@ -10,7 +10,7 @@ class Node {
   }
 }
 
-class DoublyLinkedList {
+export class DoublyLinkedList {
   head: Node
   tail: Node
 
