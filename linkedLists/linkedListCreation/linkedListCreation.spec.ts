@@ -15,6 +15,16 @@ function getNodeValuesHeadToTail(linkedList: DoublyLinkedList) {
   return values
 }
 
+function getNodeValuesTailToHead(linkedList: DoublyLinkedList) {
+  const values = []
+  let node = linkedList.tail
+  while (node !== null) {
+    values.push(node.value)
+    node = node.prev
+  }
+  return values
+}
+
 describe('LinkedListCreation', () => {
   it('works correctly', () => {
     const linkedList = new DoublyLinkedList()
@@ -34,5 +44,6 @@ describe('LinkedListCreation', () => {
     linkedList.tail = five
 
     expect(getNodeValuesHeadToTail(linkedList)).toBe([4, 1, 2, 3, 5])
+    expect(getNodeValuesTailToHead(linkedList)).toBe([5, 3, 2, 1, 4])
   })
 })
