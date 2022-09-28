@@ -5,6 +5,16 @@ function bindNodes(nodeOne: Node, nodeTwo: Node) {
   nodeTwo.prev = nodeOne
 }
 
+function getNodeValuesHeadToTail(linkedList: DoublyLinkedList) {
+  const values = []
+  let node = linkedList.head
+  while (node !== null) {
+    values.push(node.value)
+    node = node.next
+  }
+  return values
+}
+
 describe('LinkedListCreation', () => {
   it('works correctly', () => {
     const linkedList = new DoublyLinkedList()
@@ -22,5 +32,7 @@ describe('LinkedListCreation', () => {
     bindNodes(four, five)
     linkedList.head = one
     linkedList.tail = five
+
+    expect(getNodeValuesHeadToTail(linkedList)).toBe([4, 1, 2, 3, 5])
   })
 })
