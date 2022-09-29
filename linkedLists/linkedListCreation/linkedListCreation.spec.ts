@@ -43,6 +43,7 @@ describe('LinkedListCreation', () => {
     linkedList.head = one
     linkedList.tail = five
 
+    linkedList.setHead(four)
     expect(getNodeValuesHeadToTail(linkedList)).toBe([4, 1, 2, 3, 5])
     expect(getNodeValuesTailToHead(linkedList)).toBe([5, 3, 2, 1, 4])
   })
