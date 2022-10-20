@@ -86,13 +86,25 @@ export class DoublyLinkedList {
   }
 
   removeNodesWithValue(value: number) {
-    let index = 1
-    let currentNode = this.head
-
+    let currentNode: Node = this.head
     while (currentNode) {
       if (currentNode.value === value) {
-        this.remove(currentNode)
-        return
+        if (currentNode === this.head) {
+          this.head = currentNode.next
+        }
+
+        let prevNode: Node | null = currentNode.prev
+        let nextNode: Node | null = currentNode.next
+
+        if (prevNode) {
+          prevNode.next = nextNode
+        }
+        if (nextNode) {
+          nextNode.prev = prevNode
+        }
+        if (currentNode === this.tail) {
+          this.tail = currentNode.prev
+        }
       }
       currentNode = currentNode.next
     }
