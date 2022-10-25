@@ -20,125 +20,96 @@ export class DoublyLinkedList {
   }
 
   setHead(node: Node) {
-    if (!this.head && !this.tail) {
+    if (this.head === null) {
       this.head = node
       this.tail = node
       return
     }
-
-    if (this.containsNodeWithValue(node.value)) {
-      node.prev.next = node.next
-      node.next.prev = node.prev
-    }
-
-    this.head.prev = node
-    node.prev = null
-    node.next = this.head
-    this.head = node
+    this.insertBefore(this.head, node)
   }
 
   setTail(node: Node) {
-    if (!this.tail) {
-      this.tail = node
+    if (this.tail === null) {
+      this.setHead(node)
       return
     }
-
-    const previousTail = this.tail
-    previousTail.next = node
-    this.tail = node
-    this.tail.prev = previousTail
+    this.insertAfter(this.tail, node)
   }
 
   insertBefore(node: Node, nodeToInsert: Node) {
-    if (this.containsNodeWithValue(nodeToInsert.value)) {
-      this.remove(nodeToInsert)
-    }
+    if (nodeToInsert === this.head && nodeToInsert === this.tail) return
+    this.remove(nodeToInsert)
     nodeToInsert.prev = node.prev
     nodeToInsert.next = node
-    node.prev.next = nodeToInsert
+    if (node.prev === null) {
+      this.head = nodeToInsert
+    } else {
+      node.prev.next = nodeToInsert
+    }
     node.prev = nodeToInsert
   }
 
   insertAfter(node: Node, nodeToInsert: Node) {
-    if (this.containsNodeWithValue(nodeToInsert.value)) {
-      this.remove(nodeToInsert)
-    }
-    if (node === this.tail) {
-      this.tail = nodeToInsert
-    }
+    if (nodeToInsert === this.head && nodeToInsert === this.tail) return
+    this.remove(nodeToInsert)
     nodeToInsert.prev = node
     nodeToInsert.next = node.next
+    if (node.next === null) {
+      this.tail = nodeToInsert
+    } else {
+      node.next.prev = nodeToInsert
+    }
     node.next = nodeToInsert
   }
 
   insertAtPosition(position: number, nodeToInsert: Node) {
+    if (position === 1) {
+      this.setHead(nodeToInsert)
+      return
+    }
     let currentNode: Node | null = this.head
     let index: number = 1
-    
-    while (index !== position) {
-      index++
-      currentNode = currentNode.next
-    }
-    
-    if (index === 1) {
-      this.head = nodeToInsert
-    }
-    
-    nodeToInsert.next = currentNode
-
-    if (currentNode) {
-      currentNode.prev = nodeToInsert
-    }
-    if (!this.tail) {
-      this.tail = nodeToInsert
+    while (currentNode !== null && index++ !== position) currentNode = currentNode.next
+    if (currentNode !== null) {
+      this.insertBefore(currentNode, nodeToInsert)
+    } else {
+      this.setTail(nodeToInsert)
     }
   }
 
   removeNodesWithValue(value: number) {
-    let currentNode: Node = this.head
-    while (currentNode) {
-      if (currentNode.value === value) {
-        if (currentNode === this.head) {
-          this.head = currentNode.next
-        }
-
-        let prevNode: Node | null = currentNode.prev
-        let nextNode: Node | null = currentNode.next
-
-        if (prevNode) {
-          prevNode.next = nextNode
-        }
-        if (nextNode) {
-          nextNode.prev = prevNode
-        }
-        if (currentNode === this.tail) {
-          this.tail = currentNode.prev
-        }
-      }
+    let currentNode: Node | null = this.head
+    while (currentNode !== null) {
+      const nodeToRemove = currentNode
       currentNode = currentNode.next
+      if (nodeToRemove.value === value) {
+        this.remove(nodeToRemove)
+      }
     }
   }
 
   remove(node: Node) {
-    let currentNode = this.head
-    while (currentNode !== this.tail) {
-      if (currentNode === node) {
-        currentNode.next.prev = currentNode.prev
-        currentNode.prev.next = currentNode.next
-        return
-      }
-      currentNode = currentNode.next
+    if (node === this.head) {
+      this.head = this.head.next
     }
+    if (node === this.tail) {
+      this.tail = this.tail.prev
+    }
+    if (node.prev !== null) {
+      node.prev.next = node.next
+    }
+    if (node.next !== null) {
+      node.next.prev = node.prev
+    }
+    node.prev = null
+    node.next = null
   }
 
   containsNodeWithValue(value: number) {
-    let currentNode = this.head
-    while (currentNode !== null) {
-      if (currentNode.value === value) {
-        return true
-      }
+    let currentNode: Node | null = this.head
+    while (currentNode !== null && currentNode.value !== value) {
       currentNode = currentNode.next
     }
-    return false
+    return currentNode !== null
   }
 }
